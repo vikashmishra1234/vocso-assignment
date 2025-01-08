@@ -1,15 +1,13 @@
 import { Project } from '@/types'
 
-export async function geocodeProjects(projects: Project[]): Promise<Project[]> {
-  const apiKey = "728505ec6527607d7961d53b35465af2"
-console.log(apiKey)
-  const geocodedProjects = await Promise.all(
-    projects.map(async (project) => {
+export async function geocodeProjects(project: Project): Promise<Project> {
+  const apiKey = "162085c8136fa717acbaaf0326c6713c"
+ 
+   
       const response = await fetch(
         `http://api.positionstack.com/v1/forward?access_key=${apiKey}&query=${encodeURIComponent(project.location)}`
       )
       const data = await response.json()
-
       if (data.data && data.data.length > 0) {
         return {
           ...project,
@@ -19,9 +17,8 @@ console.log(apiKey)
       }
 
       return project
-    })
-  )
+ 
+  
 
-  return geocodedProjects
 }
 

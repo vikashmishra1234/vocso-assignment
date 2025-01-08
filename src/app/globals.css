@@ -7,4 +7,27 @@ body{
   padding: 0;
 }
 
+/* app/globals.css */
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 12px;
+  min-width: 200px;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.leaflet-marker-icon {
+  border: none;
+  background: none;
+}
+
 
