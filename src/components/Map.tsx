@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { useProjects } from "@/hooks/useProjects";
 import type { Project } from "@/types";
 import "leaflet/dist/leaflet.css";
-// Dynamically import Leaflet components with no SSR
 const MapContainer = dynamic(
   () => import("react-leaflet").then((mod) => mod.MapContainer),
   { ssr: false }
@@ -24,16 +23,13 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
   ssr: false,
 });
 
-// Create a separate map component that loads only on client side
 const MapComponent = ({ projects }: { projects: Project[] }) => {
   const [L, setL] = useState<any>(null);
 
   useEffect(() => {
-    // Import Leaflet on client side
     import("leaflet").then((L) => {
       setL(L);
-      // Import Leaflet CSS
-      // import ('leaflet/dist/leaflet.css');
+     
     });
   }, []);
 
@@ -84,7 +80,6 @@ const MapComponent = ({ projects }: { projects: Project[] }) => {
   );
 };
 
-// Main component with loading states
 export default function Map({ cityName }: { cityName: string }) {
   const { projects } = useProjects(cityName);
   const [isClient, setIsClient] = useState(false);
@@ -112,7 +107,7 @@ export default function Map({ cityName }: { cityName: string }) {
   if (!projects[0]?.latitude || !projects[0]?.longitude) {
     return (
       <div className="flex items-center justify-center h-full bg-yellow-100 text-yellow-700">
-        Invalid location data for projects.
+        Invalid location data for projects. (may happens because free api expires)
       </div>
     );
   }

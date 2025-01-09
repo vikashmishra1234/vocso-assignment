@@ -13,7 +13,6 @@ export async function* scrapeProjects(cityName: string): AsyncGenerator<Project>
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    // console.log('Total project cards found:', $('.projdis__prjcard').length);
 
     $('.projdis__prjcard').each((index, element) => {
       const $element = $(element);

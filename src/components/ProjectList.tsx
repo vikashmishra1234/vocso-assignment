@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Project } from '@/types';
+
 import ProjectCard from './ProjectCard';
 import { useProjects } from '@/hooks/useProjects';
 
